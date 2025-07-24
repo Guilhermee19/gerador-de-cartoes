@@ -33,9 +33,9 @@ export function BookCard({ book }: BookCardProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size to 1143x1475
+    /// Set canvas size to 1143x1650 (increased height for 6 fields)
     canvas.width = 1143;
-    canvas.height = 1475;
+    canvas.height = 1650;
 
     // Clear canvas with light gray background
     ctx.fillStyle = "#f8f9fa";
@@ -68,14 +68,11 @@ export function BookCard({ book }: BookCardProps) {
       // Draw each field with its icon
       const fields = [
         { icon: pagesIcon, label: "Número de páginas", value: book.pages },
+        { icon: calendarIcon, label: "Formato", value: book.format },
+        { icon: dimensionsIcon, label: "Peso", value: book.weight },
         { icon: publisherIcon, label: "Editora", value: book.publisher },
-        {
-          icon: calendarIcon,
-          label: "Data da publicação",
-          value: book.publicationDate,
-        },
-        { icon: dimensionsIcon, label: "Dimensões", value: book.dimensions },
-        { icon: barcodeIcon, label: "ISBN-13", value: book.isbn },
+        { icon: publisherIcon, label: "Acabamento", value: book.finish },
+        { icon: barcodeIcon, label: "ISBN", value: book.isbn },
       ];
 
       fields.forEach((field) => {
@@ -128,10 +125,11 @@ export function BookCard({ book }: BookCardProps) {
     // Draw each field
     const fields = [
       { icon: "1.", label: "Número de páginas", value: book.pages },
+      { icon: "📅", label: "Formato", value: book.format },
+      { icon: "📏", label: "Peso", value: book.weight },
       { icon: "🏢", label: "Editora", value: book.publisher },
-      { icon: "📅", label: "Data da publicação", value: book.publicationDate },
-      { icon: "📏", label: "Dimensões", value: book.dimensions },
-      { icon: "📊", label: "ISBN-13", value: book.isbn },
+      { icon: "🏢", label: "Acabamento", value: book.finish },
+      { icon: "📊", label: "ISBN", value: book.isbn },
     ];
 
     fields.forEach((field) => {

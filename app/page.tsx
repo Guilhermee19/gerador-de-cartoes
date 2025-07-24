@@ -1,53 +1,63 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { BookForm } from "@/components/book-form"
-import { FileUpload } from "@/components/file-upload"
-import { BookList } from "@/components/book-list"
-import { BookOpen, Upload, List } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BookForm } from "@/components/book-form";
+import { FileUpload } from "@/components/file-upload";
+import { BookList } from "@/components/book-list";
+import { BookOpen, Upload, List } from "lucide-react";
 
 export interface Book {
-  id: string
-  pages: string
-  publisher: string
-  publicationDate: string
-  dimensions: string
-  isbn: string
+  id: string;
+  pages: string;
+  format: string;
+  weight: string;
+  publisher: string;
+  finish: string;
+  isbn: string;
 }
 
 export default function Home() {
-  const [books, setBooks] = useState<Book[]>([])
+  const [books, setBooks] = useState<Book[]>([]);
 
   const addBook = (book: Omit<Book, "id">) => {
     const newBook = {
       ...book,
       id: Date.now().toString(),
-    }
-    setBooks((prev) => [...prev, newBook])
-  }
+    };
+    setBooks((prev) => [...prev, newBook]);
+  };
 
   const addBooks = (newBooks: Omit<Book, "id">[]) => {
     const booksWithIds = newBooks.map((book) => ({
       ...book,
       id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-    }))
-    setBooks((prev) => [...prev, ...booksWithIds])
-  }
+    }));
+    setBooks((prev) => [...prev, ...booksWithIds]);
+  };
 
   const removeBook = (id: string) => {
-    setBooks((prev) => prev.filter((book) => book.id !== id))
-  }
+    setBooks((prev) => prev.filter((book) => book.id !== id));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Gerador de Cards de Livros</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Gerador de Cards de Livros
+          </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Crie cards profissionais com detalhes de livros. Adicione informações manualmente ou importe uma planilha e
-            baixe os cards individualmente.
+            Crie cards profissionais com detalhes de livros. Adicione
+            informações manualmente ou importe uma planilha e baixe os cards
+            individualmente.
           </p>
         </div>
 
@@ -71,7 +81,9 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <CardTitle>Adicionar Livro Manualmente</CardTitle>
-                <CardDescription>Preencha os campos abaixo para adicionar um novo livro</CardDescription>
+                <CardDescription>
+                  Preencha os campos abaixo para adicionar um novo livro
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <BookForm onSubmit={addBook} />
@@ -84,8 +96,9 @@ export default function Home() {
               <CardHeader>
                 <CardTitle>Importar Planilha</CardTitle>
                 <CardDescription>
-                  Faça upload de um arquivo CSV ou Excel com os dados dos livros. As colunas devem ser: páginas,
-                  editora, data_publicacao, dimensoes, isbn
+                  Faça upload de um arquivo CSV ou Excel com os dados dos
+                  livros. As colunas devem ser: páginas, editora,
+                  data_publicacao, dimensoes, isbn
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -100,5 +113,5 @@ export default function Home() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

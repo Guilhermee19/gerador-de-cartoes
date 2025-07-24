@@ -33,7 +33,7 @@ export function BookCard({ book }: BookCardProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    /// Set canvas size to 1143x1650 (increased height for 6 fields)
+    // Set canvas size to 1143x1650 (increased height for 6 fields)
     canvas.width = 1143;
     canvas.height = 1650;
 
@@ -45,16 +45,18 @@ export function BookCard({ book }: BookCardProps) {
     try {
       const [
         pagesIcon,
+        formatIcon,
+        weightIcon,
         publisherIcon,
-        calendarIcon,
-        dimensionsIcon,
+        finishIcon,
         barcodeIcon,
       ] = await Promise.all([
-        loadImage("/icons/pages-icon.png"),
-        loadImage("/icons/publisher-icon.png"),
-        loadImage("/icons/calendar-icon.png"),
-        loadImage("/icons/dimensions-icon.png"),
-        loadImage("/icons/barcode-icon.png"),
+        loadImage("icons/book-open.png"),
+        loadImage("icons/reading.png"),
+        loadImage("icons/gallery-vertical-end.png"),
+        loadImage("icons/buildings.png"),
+        loadImage("icons/book-bookmark.png"),
+        loadImage("icons/barcode.png"),
       ]);
 
       // Title - scaled proportionally
@@ -68,10 +70,10 @@ export function BookCard({ book }: BookCardProps) {
       // Draw each field with its icon
       const fields = [
         { icon: pagesIcon, label: "Número de páginas", value: book.pages },
-        { icon: calendarIcon, label: "Formato", value: book.format },
-        { icon: dimensionsIcon, label: "Peso", value: book.weight },
+        { icon: formatIcon, label: "Formato", value: book.format },
+        { icon: weightIcon, label: "Peso", value: book.weight },
         { icon: publisherIcon, label: "Editora", value: book.publisher },
-        { icon: publisherIcon, label: "Acabamento", value: book.finish },
+        { icon: finishIcon, label: "Acabamento", value: book.finish },
         { icon: barcodeIcon, label: "ISBN", value: book.isbn },
       ];
 
@@ -122,18 +124,18 @@ export function BookCard({ book }: BookCardProps) {
 
     let yPosition = 380;
 
-    // Draw each field
+    // Draw each field with emojis
     const fields = [
-      { icon: "1.", label: "Número de páginas", value: book.pages },
-      { icon: "📅", label: "Formato", value: book.format },
-      { icon: "📏", label: "Peso", value: book.weight },
+      { icon: "📖", label: "Número de páginas", value: book.pages },
+      { icon: "📏", label: "Formato", value: book.format },
+      { icon: "⚖️", label: "Peso", value: book.weight },
       { icon: "🏢", label: "Editora", value: book.publisher },
-      { icon: "🏢", label: "Acabamento", value: book.finish },
+      { icon: "📦", label: "Acabamento", value: book.finish },
       { icon: "📊", label: "ISBN", value: book.isbn },
     ];
 
     fields.forEach((field) => {
-      // Icon/Number - scaled proportionally
+      // Emoji icon - scaled proportionally
       ctx.font = "bold 61px Arial";
       ctx.fillStyle = "#000000";
       ctx.fillText(field.icon, 114, yPosition);
